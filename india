@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Disaster Management Mind Map</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --branch-color: #4a4a4a;
+            --node-bg: #1e1e1e;
+            --accent: #bb86fc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+            margin: 0;
+        }
+
+        .tree ul {
+            padding-top: 20px; 
+            position: relative;
+            transition: all 0.5s;
+        }
+
+        .tree li {
+            float: left; 
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 5px 0 5px;
+            transition: all 0.5s;
+        }
+
+        /* Connecting Lines */
+        .tree li::before, .tree li::after {
+            content: '';
+            position: absolute; 
+            top: 0; 
+            right: 50%;
+            border-top: 1px solid var(--branch-color);
+            width: 50%; 
+            height: 20px;
+        }
+        .tree li::after {
+            right: auto; 
+            left: 50%;
+            border-left: 1px solid var(--branch-color);
+        }
+
+        .tree li:only-child::after, .tree li:only-child::before {
+            display: none;
+        }
+
+        .tree li:only-child { padding-top: 0; }
+        .tree li:first-child::before, .tree li:last-child::after {
+            border: 0 none;
+        }
+        .tree li:last-child::before {
+            border-right: 1px solid var(--branch-color);
+            border-radius: 0 5px 0 0;
+        }
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+        }
+
+        .tree ul ul::before {
+            content: '';
+            position: absolute; 
+            top: 0; 
+            left: 50%;
+            border-left: 1px solid var(--branch-color);
+            width: 0; 
+            height: 20px;
+        }
+
+        /* Node Styling */
+        .node {
+            border: 1px solid var(--branch-color);
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            background-color: var(--node-bg);
+            display: inline-block;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .node:hover {
+            background: var(--accent);
+            color: #000;
+            border: 1px solid var(--accent);
+        }
+
+        /* Interactivity Classes */
+        .hidden {
+            display: none;
+        }
+
+        .collapsed > ul {
+            display: none;
+        }
+
+        h1 {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<h1>Disaster Management Policy Framework (Interactive)</h1>
+
+<div class="tree">
+    <ul>
+        <li>
+            <div class="node" onclick="toggle(this)">Disaster Management Policy Framework (India)</div>
+            <ul>
+                <li>
+                    <div class="node" onclick="toggle(this)">Global Architecture</div>
+                    <ul>
+                        <li>
+                            <div class="node" onclick="toggle(this)">Sendai Framework (2015-2030)</div>
+                            <ul>
+                                <li><div class="node">Disaster Risk Governance</div></li>
+                                <li><div class="node">Build Back Better</div></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="node" onclick="toggle(this)">Hyogo Framework (2005-2015)</div>
+                            <ul>
+                                <li><div class="node">Institutional Basis for DRR</div></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="node" onclick="toggle(this)">SDG Alignment</div>
+                            <ul>
+                                <li><div class="node">Goal 11: Sustainable Cities</div></li>
+                                <li><div class="node">Goal 13: Climate Action</div></li>
+                                <li><div class="node">Goal 5: Gender Equality</div></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <div class="node" onclick="toggle(this)">National Legislative Framework</div>
+                    <ul>
+                        <li>
+                            <div class="node" onclick="toggle(this)">Disaster Management Act 2005</div>
+                            <ul>
+                                <li><div class="node">Mandatory State & Local Authorities</div></li>
+                                <li><div class="node">Mainstreaming DRR into Development</div></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="node" onclick="toggle(this)">Supporting Acts</div>
+                            <ul>
+                                <li><div class="node">Coastal Regulation Zone (CRZ) Notification 2018</div></li>
+                                <li><div class="node">Environment Protection Act 1986</div></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <div class="node" onclick="toggle(this)">Institutional Hierarchy</div>
+                    <ul>
+                        <li>
+                            <div class="node" onclick="toggle(this)">National Level</div>
+                            <ul>
+                                <li><div class="node">NDMA (Policy & Sanction)</div></li>
+                                <li><div class="node">NDRF (Specialized Response)</div></li>
+                                <li><div class="node">NIDM (Capacity Building)</div></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="node" onclick="toggle(this)">State / District</div>
+                            <ul>
+                                <li><div class="node">SDMA (State Planning)</div></li>
+                                <li><div class="node">DDMA (Local Implementation)</div></li>
+                                <li><div class="node">Incident Response System (IRS)</div></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <div class="node" onclick="toggle(this)">Key Policy Strategies</div>
+                    <ul>
+                        <li>
+                            <div class="node" onclick="toggle(this)">Financial Mechanisms</div>
+                            <ul>
+                                <li><div class="node">SDRF/NDRF Funding</div></li>
+                                <li><div class="node">10% Fund for Local DRR</div></li>
+                                <li><div class="node">Catastrophe Insurance</div></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="node" onclick="toggle(this)">Community Empowerment</div>
+                            <ul>
+                                <li><div class="node">Aapda Mitra (Volunteer Training)</div></li>
+                                <li><div class="node">Indigenous Knowledge Integration</div></li>
+                                <li><div class="node">School-led Disaster Management</div></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <div class="node" onclick="toggle(this)">Implementation Challenges</div>
+                    <ul>
+                        <li>
+                            <div class="node" onclick="toggle(this)">Gaps in Resilience</div>
+                            <ul>
+                                <li><div class="node">Awareness-Practice Gap</div></li>
+                                <li><div class="node">Lack of Financial Synergy</div></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="node" onclick="toggle(this)">Structural Issues</div>
+                            <ul>
+                                <li><div class="node">Inter-departmental Silos</div></li>
+                                <li><div class="node">Non-compliance with Building Codes</div></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script>
+    function toggle(element) {
+        const parentLi = element.parentElement;
+        parentLi.classList.toggle('collapsed');
+    }
+</script>
+
+</body>
+</html>
